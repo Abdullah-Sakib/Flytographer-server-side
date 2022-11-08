@@ -17,11 +17,19 @@ async function run(){
   try{
     const serviceCollection = client.db("flytographerDB").collection("services");
     
+    app.post('/service', async(req, res) =>{
+      const service = req.body;
+      const result = await serviceCollection.insertOne(service);
+      res.send(result);
+    })
+
   }
   finally{
 
   }
 }
+
+run().catch(error => console.log(error))
 
 
 app.get('/', (req, res)=>{
