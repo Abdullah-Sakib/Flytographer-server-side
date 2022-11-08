@@ -23,6 +23,18 @@ async function run(){
       res.send(result);
     })
 
+    app.get('/services', async(req, res) => {
+      const dataLimit = parseInt(req.query.dataLimit);
+      const query = {};
+      const cursor = serviceCollection.find(query);
+      if(dataLimit){
+       const result = await cursor.limit(dataLimit).toArray();
+       return res.send(result);
+      }
+      const result = await cursor.toArray();
+      res.send(result);
+    })
+
   }
   finally{
 
